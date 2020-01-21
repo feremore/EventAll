@@ -1,0 +1,32 @@
+﻿@model EventAll.ViewModels.ViewVenueViewModel
+
+
+
+
+
+
+<div class="container">
+
+    <div class="row" style="margin-bottom:15px;">
+        <h1>@Model.Venue.Name:</h1>
+        <div class="col-6">
+            <table class="table">
+                <tr>
+                    <td>Capacity</td>
+                    <td>Price</td>
+                </tr>
+                <tr>
+
+                    <td>@Model.Venue.Capacity</td>
+                    <td>$@Model.Venue.Price</td>
+                </tr>
+            </table>
+
+
+        </div>
+        <div class="col-6">
+            <h2>List of Events:</h2>
+        </div>
+
+    </div>
+</div>

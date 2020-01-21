@@ -1,0 +1,41 @@
+﻿@model EventAll.ViewModels.ViewStaffViewModel
+
+
+
+
+
+
+<div class="container">
+
+    <div class="row" style="margin-bottom:15px;">
+        <h1>@Model.Staff.Name:</h1>
+        <div class="col-6">
+            <table class="table">
+                <tr>
+                    <td>Skills</td>
+                    <td>Wage</td>
+                </tr>
+                <tr>
+
+                    <td>@foreach (string job in Model.Staff.Skills)
+                    {
+                        <div>@job </div>
+                    }</td>
+                    <td>$@Model.Staff.Wage</td>
+                </tr>
+            </table>
+            <form asp-controller="Staff" asp-action="ViewStaff" method="post">
+                <label asp-for="Job"></label>
+                <input class="form-control" asp-for="Job" />
+                <input type="hidden" name="StaffID" value="@Model.Staff.ID" />
+                <input type="submit" value="Add Skill" />
+
+            </form>
+
+        </div>
+        <div class="col-6">
+            <h2>List of Events:</h2>
+        </div>
+
+    </div>
+</div>
