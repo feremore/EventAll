@@ -5396,11 +5396,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Kloew\\codecamp\\EventAll\\EventAllApp\\EventAll\\EventAll.csproj",
+      "projectUniqueName": "C:\\Users\\Kloew\\Capstone\\EventAll\\EventAllApp\\EventAll\\EventAll.csproj",
       "projectName": "EventAll",
-      "projectPath": "C:\\Users\\Kloew\\codecamp\\EventAll\\EventAllApp\\EventAll\\EventAll.csproj",
+      "projectPath": "C:\\Users\\Kloew\\Capstone\\EventAll\\EventAllApp\\EventAll\\EventAll.csproj",
       "packagesPath": "C:\\Users\\Kloew\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Kloew\\codecamp\\EventAll\\EventAllApp\\EventAll\\obj\\",
+      "outputPath": "C:\\Users\\Kloew\\Capstone\\EventAll\\EventAllApp\\EventAll\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Kloew\\AppData\\Roaming\\NuGet\\NuGet.Config",

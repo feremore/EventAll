@@ -37,12 +37,11 @@ namespace EventAll.Controllers
         {
             if (ModelState.IsValid)
             {
-                List<string> newSkill = new List<string>();
-                newSkill.Add(addStaffViewModel.Job);
+                
                 Staff newStaff = new Staff
                 {
                     Name = addStaffViewModel.Name,
-                    Skills = newSkill,
+                    Skill = addStaffViewModel.Job,
                     Wage = addStaffViewModel.Wage
                 };
                 context.Add(newStaff);
@@ -77,9 +76,10 @@ namespace EventAll.Controllers
 
         }
         [HttpPost]
-        public IActionResult ViewStaff(ViewStaffViewModel viewStaffViewModel)
+        public IActionResult ViewStaff(ViewStaffViewModel viewStaffView)
         {
             
+            return View(viewStaffView);
         }
         public IActionResult Remove()
         {
@@ -93,8 +93,8 @@ namespace EventAll.Controllers
         {
             foreach (int staffId in staffIds)
             {
-                Venue theStaff = context.Venues.Single(v => v.ID == staffId);
-                context.Venues.Remove(theStaff);
+                Staff theStaff = context.Staffs.Single(v => v.ID == staffId);
+                context.Staffs.Remove(theStaff);
             }
 
             context.SaveChanges();

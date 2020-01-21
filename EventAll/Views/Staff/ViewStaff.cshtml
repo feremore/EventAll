@@ -17,20 +17,14 @@
                 </tr>
                 <tr>
 
-                    <td>@foreach (string job in Model.Staff.Skills)
-                    {
-                        <div>@job </div>
-                    }</td>
-                    <td>$@Model.Staff.Wage</td>
+                    <td>
+                    
+                        @Model.Staff.Skill 
+                    </td>
+                    <td>$@Model.Staff.Wage per/hour</td>
                 </tr>
             </table>
-            <form asp-controller="Staff" asp-action="ViewStaff" method="post">
-                <label asp-for="Job"></label>
-                <input class="form-control" asp-for="Job" />
-                <input type="hidden" name="StaffID" value="@Model.Staff.ID" />
-                <input type="submit" value="Add Skill" />
-
-            </form>
+            
 
         </div>
         <div class="col-6">

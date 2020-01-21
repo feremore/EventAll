@@ -20,7 +20,7 @@ namespace EventAll.ViewModels
         [Required]
         [Display(Name = "Staff Skill")]
         public string Job { get; set; }
-        public List<string> Skills { get; set; }
+        
         public AddStaffViewModel()
         {
 

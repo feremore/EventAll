@@ -5,12 +5,11 @@ using System.Threading.Tasks;
 
 namespace EventAll.Models
 {
-    public class Staff
+    public class Equipment
     {
         public int ID { get; set; }
         public string Name { get; set; }
-        public string Skill { get; set; }
-        public double Wage { get; set; }
-        public IList<EventStaff> Events { get; set; }
+        public IList<EventEquipment> EventEquipments { get; set; }
+        public IList<Item> Items { get; set; }
     }
 }

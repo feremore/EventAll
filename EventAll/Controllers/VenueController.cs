@@ -21,7 +21,7 @@ namespace EventAll.Controllers
             context = dbContext;
         }
         // GET: /<controller>/
-        [Route("/Venue")]
+        
         public IActionResult Index()
         {
             List<Venue> venues = context.Venues.ToList();

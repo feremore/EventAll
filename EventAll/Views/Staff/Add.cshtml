@@ -1,18 +1,18 @@
-﻿@model EventAll.ViewModels.AddVenueViewModel
+﻿@model EventAll.ViewModels.AddStaffViewModel
 
-<h1>Add Venue</h1>
+<h1>Add Staff</h1>
 
-<form asp-controller="Venue" asp-action="Add" method="post">
+<form asp-controller="Staff" asp-action="Add" method="post">
     <label asp-for="Name"></label>
     <input class="form-control" asp-for="Name" />
     <span asp-validation-for="Name"></span>
-    <label asp-for="Capacity"></label>
-    <input class="form-control" asp-for="Capacity" />
-    <span asp-validation-for="Capacity"></span>
-    <label asp-for="Price"></label>
-    <input class="form-control" asp-for="Price" />
-    <span asp-validation-for="Price"></span>
-    <input type="submit" value="Add Venue" />
+    <label asp-for="Job"></label>
+    <input class="form-control" asp-for="Job" />
+    <span asp-validation-for="Job"></span>
+    <label asp-for="Wage"> per/hour</label>
+    <input class="form-control" asp-for="Wage" />
+    <span asp-validation-for="Wage"></span>
+    <input type="submit" value="Add Staff" />
 
 
 </form>

@@ -11,7 +11,7 @@ namespace EventAll.ViewModels
     {
         public Staff Staff { get; set; }
         [MinLength(1)]
-        public string Job { get; set; }
+        public string Job { get; set; }        
         public IList<EventStaff> Events { get; set; }
     }
 }
