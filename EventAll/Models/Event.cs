@@ -16,6 +16,7 @@ namespace EventAll.Models
         public double MiscCost { get; set; }
         public IList<EventVenue> Venues { get; set; }
         public IList<EventStaff> Staffs { get; set; }
+        public IList<EventEquipment> Equipments { get; set; }
 
         public Event()
         {
