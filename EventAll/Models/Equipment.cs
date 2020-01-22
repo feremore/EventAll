@@ -12,5 +12,10 @@ namespace EventAll.Models
         public double Price { get; set; }
         public IList<EventEquipment> EventEquipments { get; set; }
         public IList<Item> Items { get; set; }
+        public Equipment()
+        {
+
+        }
     }
+
 }

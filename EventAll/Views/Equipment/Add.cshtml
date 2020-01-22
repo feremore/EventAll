@@ -1,0 +1,16 @@
+﻿@model EventAll.ViewModels.AddEquipmentViewModel
+
+<h1>Add Equipment</h1>
+
+<form asp-controller="Equipment" asp-action="Add" method="post">
+    <label asp-for="Name"></label>
+    <input class="form-control" asp-for="Name" />
+    <span asp-validation-for="Name"></span>
+    <label asp-for="Price"></label>
+    <input class="form-control" asp-for="Price" />
+    <span asp-validation-for="Price"></span>
+   
+    <input type="submit" value="Add Equipment" />
+
+
+</form>

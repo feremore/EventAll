@@ -24,81 +24,136 @@ namespace EventAll.Controllers
         public IActionResult Index()
         {
             List<Equipment> equipmentList = context.Equipments.ToList();
-            return View(equipmentList);
+            List<Item> itemList = context.Items.ToList();
+            ViewEquipmentViewModel viewEquipmentViewModel = new ViewEquipmentViewModel
+            {
+                Equipments = equipmentList,
+                
+                Items = itemList
+            };
+            
+            return View(viewEquipmentViewModel);
         }
         public IActionResult Add()
         {
-            AddStaffViewModel addStaffViewModel = new AddStaffViewModel();
-            return View(addStaffViewModel);
+            AddEquipmentViewModel addEquipmentViewModel = new AddEquipmentViewModel();
+            return View(addEquipmentViewModel);
         }
         [HttpPost]
-        public IActionResult Add(AddStaffViewModel addStaffViewModel)
+        public IActionResult Add(AddEquipmentViewModel addEquipmentViewModel)
         {
             if (ModelState.IsValid)
             {
 
-                Staff newStaff = new Staff
+                Equipment newEquipment = new Equipment
                 {
-                    Name = addStaffViewModel.Name,
-                    Skill = addStaffViewModel.Job,
-                    Wage = addStaffViewModel.Wage
+                    Name = addEquipmentViewModel.Name,
+                    Price = addEquipmentViewModel.Price
+                  
                 };
-                context.Add(newStaff);
+                //Item newItem = new Item
+                //{
+                //    Equipment=newEquipment,
+                //    EquipmentID=newEquipment.ID
+                //};
+                //context.Add(newItem);
+                context.Add(newEquipment);
                 context.SaveChanges();
-                return Redirect("/Staff/ViewStaff/" + newStaff.ID);
+                return Redirect("/Equipment/ViewEquipment/" + newEquipment.ID);
             }
-            return View(addStaffViewModel);
+            return View(addEquipmentViewModel);
         }
-        public IActionResult ViewStaff(int id)
+        public IActionResult ViewEquipment(int id)
         {
             try
             {
-                Staff newStaff =
-                        context.Staffs.Single(s => s.ID == id);
-                List<EventStaff> events = context
-                .EventStaffs
-                .Include(events => events.Event)
-                .Where(cm => cm.StaffID == id)
-                .ToList();
+                Equipment newEquipment =
+                    context.Equipments.Single(e => e.ID == id);
 
-                ViewStaffViewModel viewStaffViewModel = new ViewStaffViewModel
+                List<EventEquipment> events = context
+                    .EventEquipments
+                    .Include(events => events.Event)
+                    .Where(cm => cm.EquipmentID == id)
+                    .ToList();
+
+                List<Item> items = context
+                    .Items
+                    .Include(items => items.Equipment)
+                    .Where(ei => ei.EquipmentID == id)
+                    .ToList();
+                
+                ViewEquipmentViewModel viewEquipmentViewModel = new ViewEquipmentViewModel
                 {
-                    Staff = newStaff,
-                    Events = events
+                    Equipment = newEquipment,
+                    Events = events,
+                    Items= items
                 };
-                return View(viewStaffViewModel);
+                return View(viewEquipmentViewModel);
             }
             catch (InvalidOperationException)
             {
-                return Redirect("/Staff");
+                return Redirect("/Equipment");
             }
 
         }
         [HttpPost]
-        public IActionResult ViewStaff(ViewStaffViewModel viewStaffView)
+        public IActionResult ViewEquipment(int EquipmentID, int NumItems, int TotalItem)
         {
-
-            return View(viewStaffView);
+            
+                Equipment newEquipment =
+                        context.Equipments.Single(e => e.ID == EquipmentID);
+            if (NumItems > 0)
+            {
+                for (int i = 0; i < NumItems; i++)
+                {
+                    Item newItem = new Item
+                    {
+                        Equipment = newEquipment,
+                        EquipmentID = newEquipment.ID
+                    };
+                    context.Add(newItem);
+                    context.SaveChanges();
+                }
+            }else if (NumItems<0)
+            {
+                NumItems *= -1;
+                List<Item> items = context
+                    .Items
+                    .Include(items => items.Equipment)
+                    .Where(ei => ei.EquipmentID == newEquipment.ID)
+                    .ToList();
+                if (TotalItem <= NumItems)
+                {
+                    NumItems = TotalItem;
+                }
+                for (int i=0;i<NumItems;i++)
+                {
+                    Item theItem = context.Items.Single(e => e.ID == items[i].ID);
+                    context.Items.Remove(theItem);
+                }
+                context.SaveChanges();
+            }
+            return Redirect("/Equipment/ViewEquipment/"+EquipmentID);
         }
         public IActionResult Remove()
         {
-            ViewBag.title = "Remove Staff:";
-            ViewBag.staffs = context.Staffs.ToList();
+            ViewBag.title = "Remove Equipment:";
+            ViewBag.equipments = context.Equipments.ToList();
             return View();
         }
 
         [HttpPost]
-        public IActionResult Remove(int[] staffIds)
+        public IActionResult Remove(int[] equipmentIds)
         {
-            foreach (int staffId in staffIds)
+            foreach (int equipmentId in equipmentIds)
             {
-                Staff theStaff = context.Staffs.Single(v => v.ID == staffId);
-                context.Staffs.Remove(theStaff);
+                Equipment theEquipment = context.Equipments.Single(e => e.ID == equipmentId);
+                context.Equipments.Remove(theEquipment);
             }
 
             context.SaveChanges();
 
-            return Redirect("/Staff");
+            return Redirect("/Equipment");
         }
     }
 }

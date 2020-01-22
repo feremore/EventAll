@@ -15,8 +15,10 @@ namespace EventAll.ViewModels
         [Range(0, int.MaxValue, ErrorMessage = "Only positive number allowed for")]
         [Display(Name ="Equipment Price")]
         public double Price { get; set; }
-        [Required]
-        [Display(Name = "Staff Skill")]
-        public string Job { get; set; }
+        
+        public AddEquipmentViewModel()
+        {
+
+        }
     }
 }

@@ -144,3 +144,7 @@ C:\Users\Kloew\Capstone\EventAll\EventAllApp\EventAll\obj\Debug\netcoreapp3.1\Ev
 C:\Users\Kloew\Capstone\EventAll\EventAllApp\EventAll\obj\Debug\netcoreapp3.1\EventAll.RazorTargetAssemblyInfo.cs
 C:\Users\Kloew\Capstone\EventAll\EventAllApp\EventAll\obj\Debug\netcoreapp3.1\EventAll.Views.pdb
 C:\Users\Kloew\Capstone\EventAll\EventAllApp\EventAll\obj\Debug\netcoreapp3.1\EventAll.csproj.CopyComplete
+C:\Users\Kloew\Capstone\EventAll\EventAllApp\EventAll\obj\Debug\netcoreapp3.1\Razor\Views\Equipment\Add.cshtml.g.cs
+C:\Users\Kloew\Capstone\EventAll\EventAllApp\EventAll\obj\Debug\netcoreapp3.1\Razor\Views\Equipment\Index.cshtml.g.cs
+C:\Users\Kloew\Capstone\EventAll\EventAllApp\EventAll\obj\Debug\netcoreapp3.1\Razor\Views\Equipment\Remove.cshtml.g.cs
+C:\Users\Kloew\Capstone\EventAll\EventAllApp\EventAll\obj\Debug\netcoreapp3.1\Razor\Views\Equipment\ViewEquipment.cshtml.g.cs
