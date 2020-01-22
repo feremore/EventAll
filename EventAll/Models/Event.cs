@@ -14,14 +14,17 @@ namespace EventAll.Models
         public double Budget { get; set; }
         public double TotalCost { get; set; }
         public double MiscCost { get; set; }
-        public IList<EventVenue> Venues { get; set; }
+        public int VenueID { get; set; }
+        public Venue Venue { get; set; }
         public IList<EventStaff> Staffs { get; set; }
         public IList<EventEquipment> Equipments { get; set; }
 
         public Event()
         {
+            
             this.TotalCost = 0.0;
             this.MiscCost = 0.0;
+            
 
         }
     }

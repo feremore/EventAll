@@ -1,0 +1,22 @@
+﻿@model EventAll.ViewModels.Event.AddEventViewModel
+
+<h1>Add Event</h1>
+
+<form asp-controller="Event" asp-action="Add" method="post">
+    <label asp-for="Name"></label>
+    <input class="form-control" asp-for="Name" />
+    <span asp-validation-for="Name"></span>
+    <label asp-for="Date"></label>
+    <input class="form-control" type="date" asp-for="Date" />
+    <span asp-validation-for="Date"></span>
+    <label asp-for="Budget"></label>
+    <input class="form-control" asp-for="Budget" />
+    <span asp-validation-for="Budget"></span>
+    <label asp-for="Description"></label>
+    <textarea class="form-control" asp-for="Description"></textarea>
+    <label asp-for="Venues"></label>
+    <select asp-for="VenueID" asp-items="Model.Venues"></select>
+    <input type="submit" value="Add Event" />
+
+
+</form>

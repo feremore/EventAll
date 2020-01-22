@@ -14,8 +14,7 @@ namespace EventAll.Data
         public DbSet<Staff> Staffs { get; set; }
         public DbSet<Equipment> Equipments { get; set; }
         public DbSet<Item> Items { get; set; }
-        public DbSet<EventEquipment> EventEquipments { get; set; }
-        public DbSet<EventVenue> EventVenues { get; set; }
+        public DbSet<EventEquipment> EventEquipments { get; set; }        
         public DbSet<EventStaff> EventStaffs { get; set; }
         
         
@@ -25,8 +24,7 @@ namespace EventAll.Data
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<EventVenue>()
-                .HasKey(c => new { c.EventID, c.VenueID });
+            
             modelBuilder.Entity<EventStaff>()
                 .HasKey(c => new { c.EventID, c.StaffID });
             modelBuilder.Entity<EventEquipment>()

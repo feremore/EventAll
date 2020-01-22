@@ -55,16 +55,12 @@ namespace EventAll.Controllers
             {
                 Venue newVenue =
                         context.Venues.Single(v => v.ID == id);
-                List<EventVenue> events = context
-                .EventVenues
-                .Include(events => events.Event)
-                .Where(cm => cm.VenueID == id)
-                .ToList();
+                
 
                 ViewVenueViewModel viewVenueViewModel = new ViewVenueViewModel
                 {
-                    Venue = newVenue,
-                    Events = events
+                    Venue = newVenue
+                    
                 };
                 return View(viewVenueViewModel);
             }
