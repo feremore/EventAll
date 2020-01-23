@@ -9,6 +9,6 @@ namespace EventAll.ViewModels
     public class ViewVenueViewModel
     {
         public Venue Venue { get; set; }
-        public IList<EventVenue> Events { get; set; }
+        public IList<Models.Event> Events { get; set; }
     }
 }

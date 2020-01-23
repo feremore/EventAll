@@ -55,12 +55,16 @@ namespace EventAll.Controllers
             {
                 Venue newVenue =
                         context.Venues.Single(v => v.ID == id);
-                
+                List<Event> events = context
+               .Events
+               .Include(events => events.Venue)
+               .Where(cm => cm.VenueID == id)
+               .ToList();
 
                 ViewVenueViewModel viewVenueViewModel = new ViewVenueViewModel
                 {
-                    Venue = newVenue
-                    
+                    Venue = newVenue,
+                    Events=events
                 };
                 return View(viewVenueViewModel);
             }
@@ -73,14 +77,15 @@ namespace EventAll.Controllers
         public IActionResult Remove()
         {
             ViewBag.title = "Remove Venue:";
-            ViewBag.venues = context.Venues.ToList();
+            ViewBag.objs = context.Venues.ToList();
+            ViewBag.objName = "Venue(s)";
             return View();
         }
 
         [HttpPost]
-        public IActionResult Remove(int[] venueIds)
+        public IActionResult Remove(int[] objIds)
         {
-            foreach (int venueId in venueIds)
+            foreach (int venueId in objIds)
             {
                 Venue theVenue = context.Venues.Single(v => v.ID == venueId);
                 context.Venues.Remove(theVenue);

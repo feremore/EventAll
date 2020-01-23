@@ -132,11 +132,9 @@ C:\Users\Kloew\Capstone\EventAll\EventAllApp\EventAll\obj\Debug\netcoreapp3.1\Ra
 C:\Users\Kloew\Capstone\EventAll\EventAllApp\EventAll\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_ValidationScriptsPartial.cshtml.g.cs
 C:\Users\Kloew\Capstone\EventAll\EventAllApp\EventAll\obj\Debug\netcoreapp3.1\Razor\Views\Staff\Add.cshtml.g.cs
 C:\Users\Kloew\Capstone\EventAll\EventAllApp\EventAll\obj\Debug\netcoreapp3.1\Razor\Views\Staff\Index.cshtml.g.cs
-C:\Users\Kloew\Capstone\EventAll\EventAllApp\EventAll\obj\Debug\netcoreapp3.1\Razor\Views\Staff\Remove.cshtml.g.cs
 C:\Users\Kloew\Capstone\EventAll\EventAllApp\EventAll\obj\Debug\netcoreapp3.1\Razor\Views\Staff\ViewStaff.cshtml.g.cs
 C:\Users\Kloew\Capstone\EventAll\EventAllApp\EventAll\obj\Debug\netcoreapp3.1\Razor\Views\Venue\Add.cshtml.g.cs
 C:\Users\Kloew\Capstone\EventAll\EventAllApp\EventAll\obj\Debug\netcoreapp3.1\Razor\Views\Venue\Index.cshtml.g.cs
-C:\Users\Kloew\Capstone\EventAll\EventAllApp\EventAll\obj\Debug\netcoreapp3.1\Razor\Views\Venue\Remove.cshtml.g.cs
 C:\Users\Kloew\Capstone\EventAll\EventAllApp\EventAll\obj\Debug\netcoreapp3.1\Razor\Views\Venue\ViewVenue.cshtml.g.cs
 C:\Users\Kloew\Capstone\EventAll\EventAllApp\EventAll\obj\Debug\netcoreapp3.1\Razor\Views\_ViewImports.cshtml.g.cs
 C:\Users\Kloew\Capstone\EventAll\EventAllApp\EventAll\obj\Debug\netcoreapp3.1\Razor\Views\_ViewStart.cshtml.g.cs
@@ -146,5 +144,8 @@ C:\Users\Kloew\Capstone\EventAll\EventAllApp\EventAll\obj\Debug\netcoreapp3.1\Ev
 C:\Users\Kloew\Capstone\EventAll\EventAllApp\EventAll\obj\Debug\netcoreapp3.1\EventAll.csproj.CopyComplete
 C:\Users\Kloew\Capstone\EventAll\EventAllApp\EventAll\obj\Debug\netcoreapp3.1\Razor\Views\Equipment\Add.cshtml.g.cs
 C:\Users\Kloew\Capstone\EventAll\EventAllApp\EventAll\obj\Debug\netcoreapp3.1\Razor\Views\Equipment\Index.cshtml.g.cs
-C:\Users\Kloew\Capstone\EventAll\EventAllApp\EventAll\obj\Debug\netcoreapp3.1\Razor\Views\Equipment\Remove.cshtml.g.cs
 C:\Users\Kloew\Capstone\EventAll\EventAllApp\EventAll\obj\Debug\netcoreapp3.1\Razor\Views\Equipment\ViewEquipment.cshtml.g.cs
+C:\Users\Kloew\Capstone\EventAll\EventAllApp\EventAll\obj\Debug\netcoreapp3.1\Razor\Views\Event\Add.cshtml.g.cs
+C:\Users\Kloew\Capstone\EventAll\EventAllApp\EventAll\obj\Debug\netcoreapp3.1\Razor\Views\Event\Index.cshtml.g.cs
+C:\Users\Kloew\Capstone\EventAll\EventAllApp\EventAll\obj\Debug\netcoreapp3.1\Razor\Views\Event\ViewEvent.cshtml.g.cs
+C:\Users\Kloew\Capstone\EventAll\EventAllApp\EventAll\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Remove.cshtml.g.cs

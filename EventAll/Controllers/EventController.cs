@@ -24,7 +24,12 @@ namespace EventAll.Controllers
         // GET: /<controller>/
         public IActionResult Index()
         {
-            List<Event> events = context.Events.ToList();
+
+            IList<Event> events = context.Events.Include(v => v.Venue)
+                .OrderBy(r => r.Date)
+                .ToList();
+            
+            
             return View(events);
         }
         public IActionResult Add()
@@ -59,6 +64,8 @@ namespace EventAll.Controllers
             {
                 Event newEvent =
                         context.Events.Single(e => e.ID == id);
+                Venue newVenue =
+                        context.Venues.Single(v => v.ID == newEvent.VenueID);
                 List<EventStaff> staffs = context
                 .EventStaffs
                 .Include(staffs => staffs.Staff)
@@ -70,14 +77,21 @@ namespace EventAll.Controllers
                 .Include(equipments => equipments.Equipment)
                 .Where(cm => cm.EventID == id)
                 .ToList();
+                
+                List<Item> items = context
+                    .Items
+                    .Include(items => items.Equipment)
+                    .Where(ei => ei.EquipmentID == id)
+                    .ToList();
 
 
-
-                ViewEventViewModel viewEventViewModel = new ViewEventViewModel
+                ViewEventViewModel viewEventViewModel = new ViewEventViewModel(context.Equipments.ToList(), context.Staffs.ToList())
                 {
                     Event = newEvent,
                     Staffs=staffs,
-                    Equipments=equipments
+                    Equipments=equipments,
+                    Venue=newVenue,
+                    Items= items
 
 
                 };
@@ -85,9 +99,86 @@ namespace EventAll.Controllers
             }
             catch (InvalidOperationException)
             {
-                return Redirect("/Venue");
+                return Redirect("/Event");
             }
 
+        }
+        [HttpPost]
+        public IActionResult AddEquipment(ViewEventViewModel viewEventViewModel, int EventID)
+        {
+            if (ModelState.IsValid)
+            {
+
+                IList<EventEquipment> existingItems = context.EventEquipments
+        .Where(ee => ee.EventID == EventID)
+        .Where(ee => ee.EquipmentID == viewEventViewModel.EquipmentID).ToList();
+                if (!existingItems.Any())
+                {
+
+                    EventEquipment eventEquipment = new EventEquipment
+                    {
+                        EquipmentID = viewEventViewModel.EquipmentID,
+
+                        EventID = EventID
+
+                    };
+
+                    context.EventEquipments.Add(eventEquipment);
+                    context.SaveChanges();
+                    
+                }
+                
+            }
+            return Redirect("/Event/ViewEvent/" + EventID);
+        }
+        [HttpPost]
+        public IActionResult AddEquipmentItems(int EventID, int EquipmentID, int NumItems, int TotalItem)
+        {
+
+            Equipment newEquipment =
+                    context.Equipments.Single(e => e.ID == EquipmentID);
+            Event newEvent =
+                    context.Events.Single(e => e.ID == EventID);
+            if (NumItems > 0 && NumItems>TotalItem)
+            {
+                for (int i = 0; i < NumItems-TotalItem; i++)
+                {
+                    Item newItem = new Item
+                    {
+                        Equipment = newEquipment,
+                        EquipmentID = newEquipment.ID
+                    };
+                    context.Add(newItem);
+                    context.SaveChanges();
+                }
+                
+                newEvent.TotalCost += (NumItems - TotalItem) * newEquipment.Price;
+                context.Events.Add(newEvent);
+                context.SaveChanges();
+            }
+            return Redirect("/Event/ViewEvent/" + EventID);
+        }
+
+            public IActionResult Remove()
+        {
+            ViewBag.title = "Remove Events:";
+            ViewBag.objs = context.Events.ToList();
+            ViewBag.objName = "Event(s)";
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Remove(int[] objIds)
+        {
+            foreach (int eventId in objIds)
+            {
+                Event theEvent = context.Events.Single(e => e.ID == eventId);
+                context.Events.Remove(theEvent);
+            }
+
+            context.SaveChanges();
+
+            return Redirect("/Event");
         }
     }
 }

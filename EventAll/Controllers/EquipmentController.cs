@@ -138,14 +138,15 @@ namespace EventAll.Controllers
         public IActionResult Remove()
         {
             ViewBag.title = "Remove Equipment:";
-            ViewBag.equipments = context.Equipments.ToList();
+            ViewBag.objs = context.Equipments.ToList();
+            ViewBag.objName = "Equipment";
             return View();
         }
 
         [HttpPost]
-        public IActionResult Remove(int[] equipmentIds)
+        public IActionResult Remove(int[] objIds)
         {
-            foreach (int equipmentId in equipmentIds)
+            foreach (int equipmentId in objIds)
             {
                 Equipment theEquipment = context.Equipments.Single(e => e.ID == equipmentId);
                 context.Equipments.Remove(theEquipment);

@@ -27,5 +27,10 @@ namespace EventAll.Models
             
 
         }
+
+        //public Event()
+        //{ 
+        
+        //}
     }
 }

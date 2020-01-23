@@ -11,7 +11,7 @@ namespace EventAll.Models
         public int ID { get; set; }
         public int Capacity { get; set; }
         public double Price { get; set; }
-        public IList<EventVenue> Events { get; set; }
+        public IList<Event> Events { get; set; }
 
     }
 }
