@@ -14,13 +14,14 @@ namespace EventAll.Controllers
 {
     public class EquipmentController : Controller
     {
+        //datebase reference
         private readonly ApplicationDbContext context;
 
         public EquipmentController(ApplicationDbContext dbContext)
         {
             context = dbContext;
         }
-        // GET: /<controller>/
+        // Populate Equipment List and Items List and passes view model into view.
         public IActionResult Index()
         {
             List<Equipment> equipmentList = context.Equipments.ToList();
@@ -40,6 +41,7 @@ namespace EventAll.Controllers
             return View(addEquipmentViewModel);
         }
         [HttpPost]
+        //Build Equipment object and add to database
         public IActionResult Add(AddEquipmentViewModel addEquipmentViewModel)
         {
             if (ModelState.IsValid)
@@ -51,12 +53,7 @@ namespace EventAll.Controllers
                     Price = addEquipmentViewModel.Price
                   
                 };
-                //Item newItem = new Item
-                //{
-                //    Equipment=newEquipment,
-                //    EquipmentID=newEquipment.ID
-                //};
-                //context.Add(newItem);
+                
                 context.Add(newEquipment);
                 context.SaveChanges();
                 return Redirect("/Equipment/ViewEquipment/" + newEquipment.ID);
