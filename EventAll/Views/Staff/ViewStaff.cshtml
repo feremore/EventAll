@@ -14,18 +14,37 @@
                 <tr>
 
                     <td>
-                    
-                        @Model.Staff.Skill 
+
+                        @Model.Staff.Skill
                     </td>
                     <td>$@Model.Staff.Wage per/hour</td>
                 </tr>
             </table>
-            
+
 
         </div>
+        
+            
         <div class="col-6">
             <h2>List of Events:</h2>
+            <table class="table">
+
+                <tr>
+                    <th>Name of Event</th>
+
+                    <th>Date</th>
+                </tr>
+
+                @foreach (var even in Model.Events)
+                {
+                    <tr>
+                        <td><a asp-controller="Event" asp-action="ViewEvent" asp-route-id="@even.Event.ID">@even.Event.Name</a></td>
+                        <td>@even.Event.Date</td>
+                    </tr>
+                }
+            </table>
         </div>
+        
 
     </div>
 </div>

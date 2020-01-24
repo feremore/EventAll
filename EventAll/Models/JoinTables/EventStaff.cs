@@ -12,9 +12,6 @@ namespace EventAll.Models
         public int StaffID { get; set; }
         public Staff Staff { get; set; }
         
-        public EventStaff()
-        {
-
-        }
+       
     }
 }

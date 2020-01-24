@@ -2,9 +2,9 @@
 
 
     <div class="container">
-
+        <h1>@Model.Event.Name: @Model.Event.Date</h1>
         <div class="row" style="margin-bottom:15px;">
-            <h1>@Model.Event.Name: @Model.Event.Date</h1>
+
             <div class="col-6">
                 @if (Model.Event.Description != null)
                 {
@@ -26,63 +26,106 @@
 
                     </tr>
                 </table>
+                <form asp-controller="Event" asp-action="AddMisc" method="post">
+                    <label>Add Miscellaneous Costs</label>
+                    <input asp-for="@Model.Event.MiscCost" name="MiscCost" />
+                    <input type="hidden" value="@Model.Event.ID"name="EventID" />
+                    <input type="submit" value="Add Cost" />
+                </form>
             </div>
         </div>
         <h1>Event Equipment:</h1>
         <div class="row" style="margin-bottom:15px;">
 
-            @if (Model.Equipments.Count() != 0)
-            {
 
-                <div class="col-6">
-                    <table class="table">
-                        <tr>
-                            <td>Name</td>
-                            <td>Inventory</td>
-                            <td>Price Per</td>
-                        </tr>
-                        
-                        <tr>
-                            @foreach (var equipment in Model.Equipments)
+            <div class="col-6">
+                <table class="table">
+                    <tr>
+                        <th>Name</th>
+                        <th>Inventory</th>
+                        <th>Price Per</th>
+                    </tr>
+
+                    <tr>
+                        @foreach (var equipment in Model.Equipments)
+                        {
+                            <td><a asp-controller="Equipment" asp-action="ViewEquipment" asp-route-id="@equipment.Equipment.ID">@equipment.Equipment.Name</a></td>
+                            @if (equipment.Equipment.Items == null)
                             {
-                                <td><a asp-controller="Equipment" asp-action="ViewEquipment" asp-route-id="@equipment.Equipment.ID">@equipment.Equipment.Name</a></td>
-                                @if (equipment.Equipment.Items == null)
-                                {
-                                    equipment.Equipment.Items = new List<Item>();
-                                }
-                                <td>@equipment.Equipment.Items.Count()</td>
-
-
-
-                                <td>$@equipment.Equipment.Price per/item</td>
-                                <td>
-                                    <form asp-controller="Event" asp-action="AddEquipmentItems" method="post">
-
-                                        <label>Add Items: </label>
-                                        <input type="hidden" name="EquipmentID" value="@equipment.Equipment.ID" />
-                                        <input type="hidden" name="TotalItem" value="@equipment.Equipment.Items.Count()" />
-                                        <input type="hidden" name="EventID" value="@Model.Event.ID" />
-                                        <input type="number" name="NumItems" />
-                                        <input type="submit" value="Add Items" />
-                                    </form>
-                                </td>
+                                equipment.Equipment.Items = new List<Item>();
                             }
-                        </tr>
-                    </table>
+                            <td>@equipment.Equipment.Items.Count()</td>
 
-                </div>
-            }
-            else
-            {
-               <br /><p>No Equipment Yet!</p><br />
-            }
-            <div>
-                <form asp-controller="Event" asp-action="AddEquipment" method="post">
-                    <label asp-for="EquipmentList"></label>
-                    <select asp-for="EquipmentID" asp-items="Model.EquipmentList"></select>
-                    <input type="hidden" name="EventID" value="@Model.Event.ID" />
-                    <input type="submit" value="Add Equipment" />
-                </form>
+
+
+                            <td>$@equipment.Equipment.Price per/item</td>
+                            <td>
+                                <form asp-controller="Event" asp-action="AddEquipmentItems" method="post">
+
+                                    <label>Add Items: </label>
+                                    <input type="hidden" name="EquipmentID" value="@equipment.Equipment.ID" />
+                                    <input type="hidden" name="TotalItem" value="@equipment.Equipment.Items.Count()" />
+                                    <input type="hidden" name="EventID" value="@Model.Event.ID" />
+                                    <input type="number" name="NumItems" />
+                                    <input type="submit" value="Add Items" />
+                                </form>
+                            </td>
+                        }
+
+                    </tr>
+                </table>
             </div>
+        </div>
+        <div>
+            <form asp-controller="Event" asp-action="AddEquipment" method="post">
+                <label asp-for="EquipmentList">Equipment List</label>
+                <select asp-for="EquipmentID" asp-items="@Model.EquipmentList"></select>
+                <input type="hidden" name="EventID" value="@Model.Event.ID" />
+                <input type="submit" value="Add Equipment" />
+            </form>
+        </div>
+        <h1>Staff List:</h1>
+        <div class="row" style="margin-bottom:15px;">
+
+            <div class="col-6">
+                <table class="table">
+                    <tr>
+                        <th>Name</th>
+                        <th>Job</th>
+                        <th>Pay Per Hour</th>
+                    </tr>
+                    <tr>
+                        @foreach (var staff in Model.Staffs)
+                        {
+                            <td><a asp-controller="Equipment" asp-action="ViewEquipment" asp-route-id="@staff.Staff.ID">@staff.Staff.Name</a></td>
+                            <td>@staff.Staff.Skill</td>
+                            <td>$@staff.Staff.Wage</td>
+
+                    <td>
+                        <form asp-controller="Event" asp-action="AddHours" method="post">
+
+                            <label>@staff.Staff.Name's Hours: </label>
+                            <input type="hidden" name="StaffID" value="@staff.Staff.ID" />
+                            <input type="hidden" name="EventID" value="@Model.Event.ID" />
+                            <input type="number" name="Hours" />
+                            <input type="submit" value="Add Hours" />
+                        </form>
+                    </td>
+                        }
+                    </tr>
+                </table>
+            </div>
+
+
+
+
+        </div>
+        <div>
+            <form asp-controller="Event" asp-action="AddStaff" method="post">
+                <label asp-for="StaffList">Staff List</label>
+                <select asp-for="StaffID" asp-items="Model.StaffList"></select>
+                <input type="hidden" name="EventID" value="@Model.Event.ID" />
+                <input type="submit" value="Add Staff" />
+            </form>
         </div>
     </div>

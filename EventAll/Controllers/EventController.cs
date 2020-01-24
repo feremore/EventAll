@@ -49,8 +49,8 @@ namespace EventAll.Controllers
                     Description = addEventViewModel.Description,
                     Budget = addEventViewModel.Budget,
                     Venue = venue,
-                    Date = addEventViewModel.Date
-                    
+                    Date = addEventViewModel.Date,
+                    TotalCost= venue.Price
                 };
                 context.Add(newEvent);
                 context.SaveChanges();
@@ -77,11 +77,9 @@ namespace EventAll.Controllers
                 .Include(equipments => equipments.Equipment)
                 .Where(cm => cm.EventID == id)
                 .ToList();
-                
+
                 List<Item> items = context
                     .Items
-                    .Include(items => items.Equipment)
-                    .Where(ei => ei.EquipmentID == id)
                     .ToList();
 
 
@@ -108,7 +106,7 @@ namespace EventAll.Controllers
         {
             if (ModelState.IsValid)
             {
-
+                
                 IList<EventEquipment> existingItems = context.EventEquipments
         .Where(ee => ee.EventID == EventID)
         .Where(ee => ee.EquipmentID == viewEventViewModel.EquipmentID).ToList();
@@ -124,10 +122,39 @@ namespace EventAll.Controllers
                     };
 
                     context.EventEquipments.Add(eventEquipment);
+
                     context.SaveChanges();
                     
                 }
                 
+            }
+            return Redirect("/Event/ViewEvent/" + EventID);
+        }
+        [HttpPost]
+        public IActionResult AddStaff(ViewEventViewModel viewEventViewModel, int EventID)
+        {
+            if (ModelState.IsValid)
+            {
+                
+                IList<EventStaff> existingItems = context.EventStaffs
+        .Where(es => es.EventID == EventID)
+        .Where(es => es.StaffID == viewEventViewModel.StaffID).ToList();
+                if (!existingItems.Any())
+                {
+
+                    EventStaff eventStaff = new EventStaff
+                    {
+                        StaffID = viewEventViewModel.StaffID,
+
+                        EventID = EventID
+
+                    };
+                    
+                    context.EventStaffs.Add(eventStaff);
+                    context.SaveChanges();
+
+                }
+
             }
             return Redirect("/Event/ViewEvent/" + EventID);
         }
@@ -153,7 +180,7 @@ namespace EventAll.Controllers
                 }
                 
                 newEvent.TotalCost += (NumItems - TotalItem) * newEquipment.Price;
-                context.Events.Add(newEvent);
+                
                 context.SaveChanges();
             }
             return Redirect("/Event/ViewEvent/" + EventID);
@@ -179,6 +206,33 @@ namespace EventAll.Controllers
             context.SaveChanges();
 
             return Redirect("/Event");
+        }
+        [HttpPost]
+        public IActionResult AddHours(int Hours,int EventID,int StaffID)
+        {
+            Event newEvent =
+                        context.Events.Single(e => e.ID == EventID);
+            Staff newStaff =
+                        context.Staffs.Single(s => s.ID == StaffID);
+            if (Hours > 0)
+            {
+                newEvent.TotalCost += newStaff.Wage * Hours;
+                context.SaveChanges();
+            }
+            return Redirect("/Event/ViewEvent/" + EventID);
+        }
+        [HttpPost]
+        public IActionResult AddMisc(double MiscCost, int EventID)
+        {
+            if (MiscCost > 0)
+            {
+                Event newEvent =
+                        context.Events.Single(e => e.ID == EventID);
+                newEvent.MiscCost += MiscCost;
+                newEvent.TotalCost += MiscCost;
+                context.SaveChanges();
+            }
+            return Redirect("/Event/ViewEvent/" + EventID);
         }
     }
 }

@@ -43,7 +43,7 @@ namespace EventAll.ViewModels
                 StaffList = new List<SelectListItem>();
                 foreach (var staff in staffs)
                 {
-                    EquipmentList.Add(new SelectListItem
+                    StaffList.Add(new SelectListItem
                     {
                         Value = staff.ID.ToString(),
                         Text = staff.Name

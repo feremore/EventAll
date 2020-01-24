@@ -13,7 +13,7 @@
                 </tr>
                 <tr>
 
-                @if (Model.Equipment.Items == null)
+                    @if (Model.Equipment.Items == null)
                     {
                         Model.Equipment.Items = new List<Item>();
                     }
@@ -25,17 +25,35 @@
                 </tr>
             </table>
             <form asp-controller="Equipment" asp-action="ViewEquipment" method="post">
-                
+
                 <label>Add/Remove Items: </label>
                 <input type="hidden" name="EquipmentID" value="@Model.Equipment.ID" />
-                <input type="hidden" name="TotalItem" value="@Model.Equipment.Items.Count()"/>
+                <input type="hidden" name="TotalItem" value="@Model.Equipment.Items.Count()" />
                 <input type="number" name="NumItems" />
                 <input type="submit" value="Add/Remove Items" />
             </form>
         </div>
+        
         <div class="col-6">
-            <h2>List of Events:</h2>
-        </div>
 
+            <h2>List of Events:</h2>
+            <table class="table">
+
+                <tr>
+                    <th>Name of Event</th>
+
+                    <th>Date</th>
+                </tr>
+
+                @foreach (var even in Model.Events)
+                {
+                    <tr>
+                        <td><a asp-controller="Event" asp-action="ViewEvent" asp-route-id="@even.Event.ID">@even.Event.Name</a></td>
+                        <td>@even.Event.Date</td>
+                    </tr>
+                }
+            </table>
+        </div>
+            
     </div>
 </div>
