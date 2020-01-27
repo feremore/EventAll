@@ -18,6 +18,7 @@ namespace EventAll.Models
         public Venue Venue { get; set; }
         public IList<EventStaff> Staffs { get; set; }
         public IList<EventEquipment> Equipments { get; set; }
+        public IList<Item> Items { get; set; }
 
         public Event()
         {

@@ -15,22 +15,33 @@
                     <tr>
                         <td>Venue</td>
                         <td>Budget</td>
+                        <td>Profit Margin</td>
+                        <td>Venue Price</td>
                         <td>Total Cost</td>
                         <td>Miscellaneous Costs</td>
                     </tr>
                     <tr>
                         <td><a asp-controller="Venue" asp-action="ViewVenue" asp-route-id="@Model.Event.VenueID">@Model.Event.Venue.Name</a></td>
                         <td>$@Model.Event.Budget</td>
+                        @if (Model.Event.Budget - Model.Event.TotalCost > 0) 
+                        {
+                    <td style="color:green">$@(Model.Event.Budget - Model.Event.TotalCost)</td>
+                        }
+                        else
+                        {
+                    <td style="color:red;">$@(Model.Event.Budget - Model.Event.TotalCost)</td>
+                        }
+                        <td>$@Model.Event.Venue.Price</td>
                         <td>$@Model.Event.TotalCost</td>
                         <td>$@Model.Event.MiscCost</td>
 
                     </tr>
                 </table>
                 <form asp-controller="Event" asp-action="AddMisc" method="post">
-                    <label>Add Miscellaneous Costs</label>
-                    <input asp-for="@Model.Event.MiscCost" name="MiscCost" />
-                    <input type="hidden" value="@Model.Event.ID"name="EventID" />
-                    <input type="submit" value="Add Cost" />
+                    <label>Add/Remove Miscellaneous Costs</label>
+                    <input type="number" name="MiscCost" />
+                    <input type="hidden" value="@Model.Event.ID" name="EventID" />
+                    <input type="submit" value="Add/Remove Cost" />
                 </form>
             </div>
         </div>
@@ -43,6 +54,7 @@
                     <tr>
                         <th>Name</th>
                         <th>Inventory</th>
+                        <th># Purchased For Event</th>
                         <th>Price Per</th>
                     </tr>
 
@@ -56,24 +68,27 @@
                             }
                             <td>@equipment.Equipment.Items.Count()</td>
 
-
+                            
+                            <td>@equipment.Equipment.Items.Where(i=>i.CurrentEventId==Model.Event.ID).Count()</td>
 
                             <td>$@equipment.Equipment.Price per/item</td>
                             <td>
-                                <form asp-controller="Event" asp-action="AddEquipmentItems" method="post">
+                                <form asp-controller="Event" asp-action="AddOrRemoveEquipmentItems" method="post">
 
-                                    <label>Add Items: </label>
+                                    <label>Total @equipment.Equipment.Name (s)Needed For Event: </label>
                                     <input type="hidden" name="EquipmentID" value="@equipment.Equipment.ID" />
                                     <input type="hidden" name="TotalItem" value="@equipment.Equipment.Items.Count()" />
                                     <input type="hidden" name="EventID" value="@Model.Event.ID" />
                                     <input type="number" name="NumItems" />
-                                    <input type="submit" value="Add Items" />
+                                    <input type="submit" value="Add/Remove Items" />
                                 </form>
                             </td>
+
                         }
 
                     </tr>
                 </table>
+
             </div>
         </div>
         <div>
@@ -84,6 +99,7 @@
                 <input type="submit" value="Add Equipment" />
             </form>
         </div>
+        <a asp-controller="Event" asp-action="RemoveEquipment" asp-route-id="@Model.Event.ID">Remove Equipment</a>
         <h1>Staff List:</h1>
         <div class="row" style="margin-bottom:15px;">
 
@@ -93,6 +109,7 @@
                         <th>Name</th>
                         <th>Job</th>
                         <th>Pay Per Hour</th>
+                        <th>Current Hours</th>
                     </tr>
                     <tr>
                         @foreach (var staff in Model.Staffs)
@@ -100,17 +117,18 @@
                             <td><a asp-controller="Equipment" asp-action="ViewEquipment" asp-route-id="@staff.Staff.ID">@staff.Staff.Name</a></td>
                             <td>@staff.Staff.Skill</td>
                             <td>$@staff.Staff.Wage</td>
+                            <td>@staff.Hours</td>
 
-                    <td>
-                        <form asp-controller="Event" asp-action="AddHours" method="post">
+                            <td>
+                                <form asp-controller="Event" asp-action="AddOrRemoveHours" method="post">
 
-                            <label>@staff.Staff.Name's Hours: </label>
-                            <input type="hidden" name="StaffID" value="@staff.Staff.ID" />
-                            <input type="hidden" name="EventID" value="@Model.Event.ID" />
-                            <input type="number" name="Hours" />
-                            <input type="submit" value="Add Hours" />
-                        </form>
-                    </td>
+                                    <label>@staff.Staff.Name's Hours: </label>
+                                    <input type="hidden" name="StaffID" value="@staff.Staff.ID" />
+                                    <input type="hidden" name="EventID" value="@Model.Event.ID" />
+                                    <input type="number" name="Hours" />
+                                    <input type="submit" value="Add/Remove Hours" />
+                                </form>
+                            </td>
                         }
                     </tr>
                 </table>
@@ -128,4 +146,5 @@
                 <input type="submit" value="Add Staff" />
             </form>
         </div>
+        <a asp-controller="Event" asp-action="RemoveStaff" asp-route-id="@Model.Event.ID">Remove Staff</a>
     </div>

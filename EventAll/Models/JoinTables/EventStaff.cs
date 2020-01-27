@@ -11,7 +11,12 @@ namespace EventAll.Models
         public Event Event { get; set; }
         public int StaffID { get; set; }
         public Staff Staff { get; set; }
-        
-       
+        public int Hours { get; set; }
+
+
+        public EventStaff()
+        {
+            this.Hours = 0;
+        }
     }
 }

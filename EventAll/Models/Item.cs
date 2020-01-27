@@ -11,5 +11,6 @@ namespace EventAll.Models
         
         public int EquipmentID {get;set;}
         public Equipment Equipment { get; set; }
+        public int CurrentEventId { get; set; }
     }
 }

@@ -149,3 +149,5 @@ C:\Users\Kloew\Capstone\EventAll\EventAllApp\EventAll\obj\Debug\netcoreapp3.1\Ra
 C:\Users\Kloew\Capstone\EventAll\EventAllApp\EventAll\obj\Debug\netcoreapp3.1\Razor\Views\Event\Index.cshtml.g.cs
 C:\Users\Kloew\Capstone\EventAll\EventAllApp\EventAll\obj\Debug\netcoreapp3.1\Razor\Views\Event\ViewEvent.cshtml.g.cs
 C:\Users\Kloew\Capstone\EventAll\EventAllApp\EventAll\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Remove.cshtml.g.cs
+C:\Users\Kloew\Capstone\EventAll\EventAllApp\EventAll\obj\Debug\netcoreapp3.1\Razor\Views\Event\RemoveEquipment.cshtml.g.cs
+C:\Users\Kloew\Capstone\EventAll\EventAllApp\EventAll\obj\Debug\netcoreapp3.1\Razor\Views\Event\RemoveStaff.cshtml.g.cs

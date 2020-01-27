@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EventAll.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200122165048_EquipmentItems")]
-    partial class EquipmentItems
+    [Migration("20200127162755_EventPro")]
+    partial class EventPro
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -63,7 +63,12 @@ namespace EventAll.Data.Migrations
                     b.Property<double>("TotalCost")
                         .HasColumnType("float");
 
+                    b.Property<int>("VenueID")
+                        .HasColumnType("int");
+
                     b.HasKey("ID");
+
+                    b.HasIndex("VenueID");
 
                     b.ToTable("Events");
                 });
@@ -91,26 +96,14 @@ namespace EventAll.Data.Migrations
                     b.Property<int>("StaffID")
                         .HasColumnType("int");
 
+                    b.Property<int>("Hours")
+                        .HasColumnType("int");
+
                     b.HasKey("EventID", "StaffID");
 
                     b.HasIndex("StaffID");
 
                     b.ToTable("EventStaffs");
-                });
-
-            modelBuilder.Entity("EventAll.Models.EventVenue", b =>
-                {
-                    b.Property<int>("EventID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("VenueID")
-                        .HasColumnType("int");
-
-                    b.HasKey("EventID", "VenueID");
-
-                    b.HasIndex("VenueID");
-
-                    b.ToTable("EventVenues");
                 });
 
             modelBuilder.Entity("EventAll.Models.Item", b =>
@@ -123,9 +116,14 @@ namespace EventAll.Data.Migrations
                     b.Property<int>("EquipmentID")
                         .HasColumnType("int");
 
+                    b.Property<int>("EventID")
+                        .HasColumnType("int");
+
                     b.HasKey("ID");
 
                     b.HasIndex("EquipmentID");
+
+                    b.HasIndex("EventID");
 
                     b.ToTable("Items");
                 });
@@ -172,6 +170,15 @@ namespace EventAll.Data.Migrations
                     b.ToTable("Venues");
                 });
 
+            modelBuilder.Entity("EventAll.Models.Event", b =>
+                {
+                    b.HasOne("EventAll.Models.Venue", "Venue")
+                        .WithMany("Events")
+                        .HasForeignKey("VenueID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("EventAll.Models.EventEquipment", b =>
                 {
                     b.HasOne("EventAll.Models.Equipment", "Equipment")
@@ -202,26 +209,17 @@ namespace EventAll.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("EventAll.Models.EventVenue", b =>
-                {
-                    b.HasOne("EventAll.Models.Event", "Event")
-                        .WithMany("Venues")
-                        .HasForeignKey("EventID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("EventAll.Models.Venue", "Venue")
-                        .WithMany("Events")
-                        .HasForeignKey("VenueID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("EventAll.Models.Item", b =>
                 {
                     b.HasOne("EventAll.Models.Equipment", "Equipment")
                         .WithMany("Items")
                         .HasForeignKey("EquipmentID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("EventAll.Models.Event", null)
+                        .WithMany("Items")
+                        .HasForeignKey("EventID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

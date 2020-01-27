@@ -1,0 +1,14 @@
+﻿<h1>@ViewBag.title</h1>
+<form method="post">
+    
+    @foreach (var obj in ViewBag.objs)
+    {
+        
+        <input type="checkbox" name="objIds" id="@obj.EquipmentID" value="@obj.EquipmentID" />
+        <input type="hidden" name="EventID" value="@obj.EventID" />
+        <label for="@obj.EquipmentID">@obj.Equipment.Name</label>
+        <br />
+    }
+
+    <input type="submit" value="Remove Selected @ViewBag.objName" />
+</form>
