@@ -17,10 +17,10 @@ namespace EventAll.Controllers
         {
             _logger = logger;
         }
-
+        
         public IActionResult Index()
         {
-            return View();
+            return Redirect("/Event");
         }
 
         public IActionResult Privacy()

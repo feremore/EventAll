@@ -61,6 +61,7 @@
                     <tr>
                         @foreach (var equipment in Model.Equipments)
                         {
+                            <tr>
                             <td><a asp-controller="Equipment" asp-action="ViewEquipment" asp-route-id="@equipment.Equipment.ID">@equipment.Equipment.Name</a></td>
                             @if (equipment.Equipment.Items == null)
                             {
@@ -83,7 +84,7 @@
                                     <input type="submit" value="Add/Remove Items" />
                                 </form>
                             </td>
-
+                                </tr>
                         }
 
                     </tr>
@@ -114,6 +115,7 @@
                     <tr>
                         @foreach (var staff in Model.Staffs)
                         {
+                            <tr>
                             <td><a asp-controller="Equipment" asp-action="ViewEquipment" asp-route-id="@staff.Staff.ID">@staff.Staff.Name</a></td>
                             <td>@staff.Staff.Skill</td>
                             <td>$@staff.Staff.Wage</td>
@@ -129,6 +131,7 @@
                                     <input type="submit" value="Add/Remove Hours" />
                                 </form>
                             </td>
+                                </tr>
                         }
                     </tr>
                 </table>
