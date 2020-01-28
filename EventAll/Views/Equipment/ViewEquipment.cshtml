@@ -4,13 +4,16 @@
 <div class="container">
 
     <div class="row" style="margin-bottom:15px;">
-        <h1>@Model.Equipment.Name:</h1>
-        <div class="col-6">
+        
+        <div class="col">
+            <h1>@Model.Equipment.Name:</h1>
             <table class="table">
-                <tr>
-                    <td>Inventory</td>
-                    <td>Price Per</td>
-                </tr>
+                <thead class=" thead-dark">
+                    <tr>
+                        <th>Inventory</th>
+                        <th>Price Per</th>
+                    </tr>
+                </thead>
                 <tr>
 
                     @if (Model.Equipment.Items == null)
@@ -34,17 +37,17 @@
             </form>
         </div>
         
-        <div class="col-6">
+        <div class="col">
 
-            <h2>List of Events:</h2>
+            <h1>List of Events:</h1>
             <table class="table">
-
+                <thead class="thead-dark">
                 <tr>
                     <th>Name of Event</th>
 
                     <th>Date</th>
                 </tr>
-
+                </thead>
                 @foreach (var even in Model.Events)
                 {
                     <tr>

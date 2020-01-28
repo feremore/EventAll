@@ -8,13 +8,16 @@
 <div class="container">
 
     <div class="row" style="margin-bottom:15px;">
-        <h1>@Model.Venue.Name:</h1>
-        <div class="col-6">
+        
+        <div class="col">
+            <h1>@Model.Venue.Name:</h1>
             <table class="table">
-                <tr>
-                    <td>Capacity</td>
-                    <td>Price</td>
-                </tr>
+                <thead class=" thead-dark">
+                    <tr>
+                        <th>Capacity</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
                 <tr>
 
                     <td>@Model.Venue.Capacity</td>
@@ -24,16 +27,16 @@
 
 
         </div>
-        <div class="col-6">
-            <h2>List of Events:</h2>
+        <div class="col">
+            <h1>List of Events:</h1>
             <table class="table">
-
+            <thead class="thead-dark">
                 <tr>
                     <th>Name of Event</th>
                    
                     <th>Date</th>
                 </tr>
-
+            </thead>
                 @foreach (var even in Model.Events)
                 {
                     <tr>

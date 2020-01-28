@@ -2,34 +2,36 @@
 
 
     <div class="container">
-        <h1>@Model.Event.Name: @Model.Event.Date</h1>
+        
         <div class="row" style="margin-bottom:15px;">
-
-            <div class="col-6">
+            <h1>@Model.Event.Name: @Model.Event.Date</h1>
+            <div>
                 @if (Model.Event.Description != null)
                 {
                     <h4>Event Description:</h4>
                     <p>@Model.Event.Description</p>
                 }
                 <table class="table">
-                    <tr>
-                        <td>Venue</td>
-                        <td>Budget</td>
-                        <td>Profit Margin</td>
-                        <td>Venue Price</td>
-                        <td>Total Cost</td>
-                        <td>Miscellaneous Costs</td>
-                    </tr>
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Venue</th>
+                            <th>Budget</th>
+                            <th>Profit Margin</th>
+                            <th>Venue Price</th>
+                            <th>Total Cost</th>
+                            <th>Miscellaneous Costs</th>
+                        </tr>
+                    </thead>
                     <tr>
                         <td><a asp-controller="Venue" asp-action="ViewVenue" asp-route-id="@Model.Event.VenueID">@Model.Event.Venue.Name</a></td>
                         <td>$@Model.Event.Budget</td>
-                        @if (Model.Event.Budget - Model.Event.TotalCost > 0) 
+                        @if (Model.Event.Budget - Model.Event.TotalCost > 0)
                         {
-                    <td style="color:green">$@(Model.Event.Budget - Model.Event.TotalCost)</td>
+                            <td style="color:green">$@(Model.Event.Budget - Model.Event.TotalCost)</td>
                         }
                         else
                         {
-                    <td style="color:red;">$@(Model.Event.Budget - Model.Event.TotalCost)</td>
+                            <td style="color:red;">$@(Model.Event.Budget - Model.Event.TotalCost)</td>
                         }
                         <td>$@Model.Event.Venue.Price</td>
                         <td>$@Model.Event.TotalCost</td>
@@ -49,15 +51,16 @@
         <div class="row" style="margin-bottom:15px;">
 
 
-            <div class="col-6">
+            <div>
                 <table class="table">
+                    <thead class="thead-dark">
                     <tr>
                         <th>Name</th>
                         <th>Inventory</th>
                         <th># Purchased For Event</th>
                         <th>Price Per</th>
                     </tr>
-
+                    </thead>
                     <tr>
                         @foreach (var equipment in Model.Equipments)
                         {
@@ -76,11 +79,11 @@
                             <td>
                                 <form asp-controller="Event" asp-action="AddOrRemoveEquipmentItems" method="post">
 
-                                    <label>Total @equipment.Equipment.Name (s)Needed For Event: </label>
+                                    <label>Total @equipment.Equipment.Name (s) Needed For Event: </label>
                                     <input type="hidden" name="EquipmentID" value="@equipment.Equipment.ID" />
                                     <input type="hidden" name="TotalItem" value="@equipment.Equipment.Items.Count()" />
                                     <input type="hidden" name="EventID" value="@Model.Event.ID" />
-                                    <input type="number" name="NumItems" />
+                                    <input type="number" name="NumItems" /><br />
                                     <input type="submit" value="Add/Remove Items" />
                                 </form>
                             </td>
@@ -104,14 +107,18 @@
         <h1>Staff List:</h1>
         <div class="row" style="margin-bottom:15px;">
 
-            <div class="col-6">
+            <div>
                 <table class="table">
+                    <thead class="thead-dark">
                     <tr>
+                       
                         <th>Name</th>
                         <th>Job</th>
                         <th>Pay Per Hour</th>
                         <th>Current Hours</th>
+                        
                     </tr>
+                        </thead>
                     <tr>
                         @foreach (var staff in Model.Staffs)
                         {
@@ -127,7 +134,7 @@
                                     <label>@staff.Staff.Name's Hours: </label>
                                     <input type="hidden" name="StaffID" value="@staff.Staff.ID" />
                                     <input type="hidden" name="EventID" value="@Model.Event.ID" />
-                                    <input type="number" name="Hours" />
+                                    <input type="number" name="Hours" /><br />
                                     <input type="submit" value="Add/Remove Hours" />
                                 </form>
                             </td>
