@@ -45,6 +45,12 @@
                     <input type="hidden" value="@Model.Event.ID" name="EventID" />
                     <input type="submit" value="Add/Remove Cost" />
                 </form>
+                <form asp-controller="Event" asp-action="ChangeBudget" method="post">
+                    <label>Change Budget</label>
+                    <input type="number" name="budget" />
+                    <input type="hidden" value="@Model.Event.ID" name="EventID" />
+                    <input type="submit" value="Change Budget" />
+                </form>
             </div>
         </div>
         <h1>Event Equipment:</h1>

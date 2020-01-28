@@ -175,8 +175,10 @@ namespace EventAll.Controllers
                     context.Equipments.Single(e => e.ID == EquipmentID);
             Event newEvent =
                     context.Events.Single(e => e.ID == EventID);
+
             //Populates a list of Items with CurrentEventId == EventID
             IList<Item> eventItems = context.Items.Where(i => i.CurrentEventId == EventID).ToList();
+
             //Prevents Adding Items to database if NumItems is less then TotalItems.
             if (NumItems > 0 && NumItems>TotalItem)
             {
@@ -267,7 +269,18 @@ namespace EventAll.Controllers
             context.SaveChanges();
             return Redirect("/Event/ViewEvent/" + EventID);
         }
-        
+        [HttpPost]
+        public IActionResult ChangeBudget(double budget, int EventID)
+        {
+            Event newEvent =
+                        context.Events.Single(e => e.ID == EventID);
+            if (budget > 0)
+            {
+                newEvent.Budget = budget;
+            }
+            context.SaveChanges();
+            return Redirect("/Event/ViewEvent/" + EventID);
+        }
         [HttpPost]
         // Add/Subtract from Event.MiscCost
         public IActionResult AddOrRemoveMisc(double MiscCost, int EventID)
