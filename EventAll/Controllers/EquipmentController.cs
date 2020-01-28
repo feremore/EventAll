@@ -21,7 +21,7 @@ namespace EventAll.Controllers
         {
             context = dbContext;
         }
-        // Populate Equipment List and Items List and passes view model into view.
+        // Populates Equipment List and Items List and passes view model into view.
         public IActionResult Index()
         {
             List<Equipment> equipmentList = context.Equipments.ToList();
@@ -35,6 +35,7 @@ namespace EventAll.Controllers
             
             return View(viewEquipmentViewModel);
         }
+        // Declares a new ViewModel for adding equipment and passes it into view. 
         public IActionResult Add()
         {
             AddEquipmentViewModel addEquipmentViewModel = new AddEquipmentViewModel();
@@ -60,6 +61,7 @@ namespace EventAll.Controllers
             }
             return View(addEquipmentViewModel);
         }
+        //Builds a view for a Equipment.ID == id.
         public IActionResult ViewEquipment(int id)
         {
             try
@@ -93,12 +95,14 @@ namespace EventAll.Controllers
             }
 
         }
+        //Adds Items of a specific Equipment ID to the database from values from view.
         [HttpPost]
         public IActionResult ViewEquipment(int EquipmentID, int NumItems, int TotalItem)
         {
             
                 Equipment newEquipment =
                         context.Equipments.Single(e => e.ID == EquipmentID);
+            //If User inputs postive number it makes a new Item NumItems amount of times.
             if (NumItems > 0)
             {
                 for (int i = 0; i < NumItems; i++)
