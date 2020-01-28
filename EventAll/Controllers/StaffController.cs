@@ -8,7 +8,6 @@ using EventAll.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-// For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace EventAll.Controllers
 {
@@ -20,8 +19,7 @@ namespace EventAll.Controllers
         {
             context = dbContext;
         }
-        // GET: /<controller>/
-        
+        //Populates a list of Staff Objects and passes to view.        
         public IActionResult Index()
         {
             List<Staff> staffs = context.Staffs.ToList();
