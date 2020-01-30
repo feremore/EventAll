@@ -68,7 +68,7 @@ namespace EventAll.Controllers
             {
                 Equipment newEquipment =
                     context.Equipments.Single(e => e.ID == id);
-
+                //Populates a list of EventEquipment relationships that have events related to newEquipment.
                 List<EventEquipment> events = context
                     .EventEquipments
                     .Include(events => events.Event)
@@ -115,18 +115,23 @@ namespace EventAll.Controllers
                     context.Add(newItem);
                     context.SaveChanges();
                 }
-            }else if (NumItems<0)
+            //If User inputs negative number it removes Items from database the amount of NumItems.
+            }
+            else if (NumItems<0)
             {
                 NumItems *= -1;
+                //Populates a list of Items with EquipmentID == newEquipment.ID
                 List<Item> items = context
                     .Items
                     .Include(items => items.Equipment)
                     .Where(ei => ei.EquipmentID == newEquipment.ID)
                     .ToList();
+                //If the total amount of items in database is less than NumItems then change NumItems to TotalItem.
                 if (TotalItem <= NumItems)
                 {
                     NumItems = TotalItem;
                 }
+                //Removes items in list from the database.
                 for (int i=0;i<NumItems;i++)
                 {
                     Item theItem = context.Items.Single(e => e.ID == items[i].ID);
@@ -136,6 +141,7 @@ namespace EventAll.Controllers
             }
             return Redirect("/Equipment/ViewEquipment/"+EquipmentID);
         }
+        //Populates list of all Equipment and pass to view.
         public IActionResult Remove()
         {
             ViewBag.title = "Remove Equipment:";
@@ -145,6 +151,7 @@ namespace EventAll.Controllers
         }
 
         [HttpPost]
+        //Using the list of ids remove equipment for each id in objIds.
         public IActionResult Remove(int[] objIds)
         {
             foreach (int equipmentId in objIds)

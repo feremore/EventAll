@@ -39,11 +39,17 @@
 
                     </tr>
                 </table>
-                <form asp-controller="Event" asp-action="AddMisc" method="post">
+                <form asp-controller="Event" asp-action="AddOrRemoveMisc" method="post">
                     <label>Add/Remove Miscellaneous Costs</label>
                     <input type="number" name="MiscCost" />
                     <input type="hidden" value="@Model.Event.ID" name="EventID" />
                     <input type="submit" value="Add/Remove Cost" />
+                </form>
+                <form asp-controller="Event" asp-action="ChangeBudget" method="post">
+                    <label>Change Budget</label>
+                    <input type="number" name="budget" />
+                    <input type="hidden" value="@Model.Event.ID" name="EventID" />
+                    <input type="submit" value="Change Budget" />
                 </form>
             </div>
         </div>
